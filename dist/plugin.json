@@ -1,5 +1,5 @@
 {
-  "name": "AppResponse (native)",
+  "name": "native",
   "id": "mgent-native-appresponse-datasource",
   "type": "datasource",
 
@@ -11,9 +11,9 @@
   "annotations": true,
 
   "info": {
-    "description": "SteelCentral AppResponse native json datasource (based on simple-json-datasource from Grafana Labs)",
+    "description": "SteelCentral AppResponse json datasource (base on simple-json-datasource from Grafana Labs)",
     "author": {
-      "name": "CRINON Nicolas, MGEN Technologies",
+      "name": "MGEN Technologies",
       "url": "https://mgen.fr"
     },
     "logos": {
@@ -21,7 +21,7 @@
       "large": "img/simpleJson_logo.svg"
     },
     "version": "1.0.0",
-    "updated": "2019-11-29"
+    "updated": "2019-07-01"
   },
 
   "dependencies": {

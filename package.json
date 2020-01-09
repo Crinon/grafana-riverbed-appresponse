@@ -1,12 +1,13 @@
 {
-  "name": "mgent-AppResponse",
+  "name": "mgent-AppResponse-native",
   "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/grunt-cli/bin/grunt",
-    "test": "./node_modules/grunt-cli/bin/grunt mochaTest"
+    "test": "./node_modules/grunt-cli/bin/grunt mochaTest",
+    "bundle": "browserify index.js > bundle.js"
   },
   "author": "CRINON Nicolas",
   "license": "",

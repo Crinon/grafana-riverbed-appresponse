@@ -1,0 +1,365 @@
+<!-- A query-editor-row is triggered when you press the 'Add Query' button, a row is A, B, C, D .... -->
+<query-editor-row query-ctrl="ctrl" class="generic-datasource-query-row" has-text-edit-mode="true">
+<!-- Select source type ('Host group', 'Application', 'Application/HG', 'WebApp', 'PageFamily') -->
+  <!-- div class="gf-form-inline" is a line -->
+  <div class="gf-form-inline">
+    <!-- div class="gf-form max-width-18" is a label and his select or dropdown associated -->
+    <div class="gf-form max-width-18">
+      <!-- Label for the select or dropdown associated -->
+      <label class="gf-form-label width-7">Source type</label>
+      <!-- Selecting source type ('Host group', 'Application', 'Application/HG', 'WebApp', 'PageFamily') -->
+      <div class="gf-form-select-wrapper max-width-11">
+        <!-- ng-model : bind selected value to attribute of ctrl.target -->
+        <!-- ng-change : run method in ctrl when selection is made -->
+        <!-- ng-options : presents all options from source (source can be an attribut array or be retrievied from en point ) -->
+        <!-- ng-init : default value -->
+        <select class="gf-form-input"    
+                ng-model="ctrl.target.type"
+                ng-change="ctrl.runningSelect()"
+                ng-options="f as f for f in ctrl.target.sourceTypeTab"
+                ng-init="ctrl.target.type = ctrl.target.type" >
+        </select>
+      </div>
+    </div>
+<!-- Aesthetic grey line taking right space to end of the line -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+
+  </div>
+  <!-- End of the line -->
+
+
+<!--*****************************************************************************************************-->
+<!--                                                                                                     -->  
+<!--                                      HOST_GROUPS BOXES                                              -->
+<!--                                                                                                     -->
+<!--*****************************************************************************************************-->
+<!-- New line -->  
+  <div class="gf-form-inline" ng-show="ctrl.target.displayHostgroupBox == true" ng-disabled="!ctrl.target.displayHostgroupBox == true">   
+    <!-- Allow rawQuery (typing in box) -->
+<!-- Host group selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <!-- Container for label and dropdown (=select) -->
+      <div class="gf-form">
+        <!-- Label (description) -->
+        <label class="gf-form-label query-keyword width-7">Host Group</label>
+        <!-- This dropdown shows every host_group returned by the method getHost_groupOptions($query) from query_ctrl.js -->
+        <!-- box display host_group.name but selected option is host_group.id (hide) -->
+        <!-- model : bind host_group.id to ctrl.target.targetID -->
+        <!-- allow-custom and lookup-text let user type host_groupe.name wished or just type for refining search -->
+        <!-- get-options use methodgetHost_groupOptions($query) that shows host_groups returned by '/getHost_group' end point -->
+        <!-- on-change use method onChangeInternal() that trigger the method query(), data are requested to end point '/query' and data are exepecting to be returned by Riverbed AppResponse, they will be displayed in graph-->
+        <gf-form-dropdown model="ctrl.target.targetID"
+          style="width: 300px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getHost_groupOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+      </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Metric for host group selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+          <label class="gf-form-label query-keyword width-7">Metric</label>
+        <gf-form-dropdown model="ctrl.target.metricID"
+          style="width: 300px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getMetricOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>   
+<!-- Aesthetic right space -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+  </div>
+
+<!-- New line -->
+    <div class="gf-form-inline" ng-show="ctrl.target.displayHostgroupBox == true" ng-disabled="!ctrl.target.displayHostgroupBox == true">
+<!-- Granularity selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+        <label class="gf-form-label query-keyword width-7">Granularity</label>
+        <select class="gf-form-input"
+          ng-model="ctrl.target.granularity"
+          ng-change="ctrl.onChangeInternal()"
+          style="width: 298px;"
+          on-change="ctrl.onChangeInternal()"
+          ng-options="f.value as f.text for f in ctrl.target.granularityTab"></select>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+  <div class="gf-form gf-form--grow">
+    <div class="gf-form-label gf-form-label--grow"></div>
+  </div>
+</div>
+
+
+<!--*****************************************************************************************************-->
+<!--                                                                                                     -->  
+<!--                                     APPLICATIONS BOXES                                              -->
+<!--                                                                                                     -->
+<!--*****************************************************************************************************-->
+<!-- New line --> 
+  <div class="gf-form-inline" ng-show="ctrl.target.displayApplicationBox == true">
+<!-- Application selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+        <label class="gf-form-label query-keyword width-7">Application</label>
+        <gf-form-dropdown model="ctrl.target.targetID"
+          style="width: 300px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getApplicationOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Metric for application selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+        <label class="gf-form-label query-keyword width-7">Metric</label>
+        <gf-form-dropdown model="ctrl.target.metricID"
+          style="width: 300px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getMetricApplicationsOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+  </div>
+<!-- New line -->
+  <div class="gf-form-inline" ng-show="ctrl.target.displayApplicationBox == true">
+<!-- Granularity selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+        <label class="gf-form-label query-keyword width-7">Granularity</label>
+        <select class="gf-form-input"
+          ng-model="ctrl.target.granularity"
+          ng-change="ctrl.onChangeInternal()"
+          style="width: 298px;"
+          on-change="ctrl.onChangeInternal()"
+          ng-options="f.value as f.text for f in ctrl.target.granularityTab">
+        </select>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+  </div>
+
+
+<!--*****************************************************************************************************-->
+<!--                                                                                                     -->  
+<!--                                APPLICATION BY HOST_GROUP BOXES                                      -->
+<!--                                                                                                     -->
+<!--*****************************************************************************************************-->
+<!-- New line -->   
+  <div class="gf-form-inline" ng-show="ctrl.target.displayApplicationByHostGroupBox == true">
+<!-- Application selection-->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form min-width-20">
+        <label class="gf-form-label query-keyword width-7">Application</label>
+        <gf-form-dropdown model="ctrl.target.targetID"
+          style="width: 300px;"  
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getApplicationOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Host_group selection-->
+    <div ng-if="!ctrl.target.rawQuery">         
+      <div class="gf-form min-width-20">
+          <label class="gf-form-label query-keyword width-7">Host Group</label>
+          <gf-form-dropdown model="ctrl.target.secondTargetID"
+            style="width: 300px;"
+            allow-custom="true"
+            lookup-text="true"
+            get-options="ctrl.getHost_groupOptions($query)"
+            on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+      <div class="gf-form gf-form--grow">
+        <div class="gf-form-label gf-form-label--grow"></div>
+      </div>
+  </div>
+  <!-- <button style="color:#33B5E5; background-color: #212327; width: 10em; height: 2.2em; margin: 4px;" ng-click="ctrl.buttonLoadPageFamilies($query)">Load page families</button> -->
+<!-- New line -->       
+  <div class="gf-form-inline" ng-show="ctrl.target.displayApplicationByHostGroupBox == true">
+<!-- Metric selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form min-width-20">
+        <label class="gf-form-label query-keyword width-7">Metric</label>
+        <gf-form-dropdown model="ctrl.target.metricID"
+          style="width: 300px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getMetricApplicationsOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Granularity selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form min-width-20">
+          <label class="gf-form-label query-keyword width-7">Granularity</label>
+          <select class="gf-form-input"
+          ng-model="ctrl.target.granularity"
+          ng-change="ctrl.onChangeInternal()"
+          style="width: 298px;"
+          on-change="ctrl.onChangeInternal()"
+          ng-options="f.value as f.text for f in ctrl.target.granularityTab"></select>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+  </div>
+
+
+<!--*****************************************************************************************************-->
+<!--                                                                                                     -->  
+<!--                                           WEBAPP BOXES                                              -->
+<!--                                                                                                     -->
+<!--*****************************************************************************************************--> 
+<!-- New line -->   
+  <div class="gf-form-inline" ng-show="ctrl.target.displayWebAppBox == true">
+<!-- WebApp selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+        <label class="gf-form-label query-keyword width-7">WebApp</label>
+        <gf-form-dropdown model="ctrl.target.targetID"
+          style="width: 300px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getWebAppOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Metric selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+        <label class="gf-form-label query-keyword width-7">Metric</label>
+        <gf-form-dropdown model="ctrl.target.metricID"
+          style="width: 300px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getMetricWAOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+  </div>
+<!-- New line -->  
+  <div class="gf-form-inline" ng-show="ctrl.target.displayWebAppBox == true">
+<!-- Granularity selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+          <label class="gf-form-label query-keyword width-7">Granularity</label>
+          <select class="gf-form-input"
+          ng-model="ctrl.target.granularity"
+          ng-change="ctrl.onChangeInternal()"
+          style="width: 298px;"
+          on-change="ctrl.onChangeInternal()"
+          ng-options="f.value as f.text for f in ctrl.target.granularityTab"></select>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+  </div>
+
+
+<!--*****************************************************************************************************-->
+<!--                                                                                                     -->  
+<!--                                         PAGE FAMILY BOXES                                           -->
+<!--                                                                                                     -->
+<!--*****************************************************************************************************--> 
+<!-- New line -->   
+  <div class="gf-form-inline" ng-show="ctrl.target.displayPageFamilyBox == true">
+<!-- WebApp selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+        <label class="gf-form-label query-keyword width-7">WebApp</label>
+        <gf-form-dropdown model="ctrl.target.targetID"
+          style="width: 500px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getWebAppOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Metric selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+        <label class="gf-form-label query-keyword width-7">Metric</label>
+        <gf-form-dropdown model="ctrl.target.metricID"
+          style="width: 300px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getMetricWAOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+        </gf-form-dropdown>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+  </div>
+<!-- New line -->  
+  <div class="gf-form-inline" ng-show="ctrl.target.displayPageFamilyBox == true">
+<!-- Page family selection -->
+    <div ng-if="!ctrl.target.rawQuery">         
+      <div class="gf-form">
+          <label class="gf-form-label query-keyword width-7">Page Family</label>
+        <gf-form-dropdown model="ctrl.target.pageFamilyID"
+          style="width: 500px;"
+          allow-custom="true"
+          lookup-text="true"
+          get-options="ctrl.getPageFamilyOptions($query)"
+          on-change="ctrl.onChangeInternal()">
+      </gf-form-dropdown>
+      </div>
+      </div>
+<!-- Granularity selection -->
+    <div ng-if="!ctrl.target.rawQuery">
+      <div class="gf-form">
+          <label class="gf-form-label query-keyword width-7">Granularity</label>
+          <select class="gf-form-input"
+          ng-model="ctrl.target.granularity"
+          ng-change="ctrl.onChangeInternal()"
+          style="width: 150px;"
+          on-change="ctrl.onChangeInternal()"
+          ng-options="f.value as f.text for f in ctrl.target.granularityTab"></select>
+      </div>
+    </div>
+<!-- Aesthetic right space -->
+    <div class="gf-form gf-form--grow">
+      <div class="gf-form-label gf-form-label--grow"></div>
+    </div>
+  </div>
+</div>
+</query-editor-row> 

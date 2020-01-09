@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-
   require('load-grunt-tasks')(grunt);
 
   grunt.loadNpmTasks('grunt-execute');
@@ -15,6 +14,18 @@ module.exports = function(grunt) {
         expand: true,
         src: ['**/*', '!**/*.js', '!**/*.scss'],
         dest: 'dist'
+      },
+      request: {
+        cwd: 'node_modules/request',
+        expand: true,
+        src: ['**/*'],
+        dest: 'dist/request'
+      },
+      request_tests: {
+        cwd: 'node_modules/request',
+        expand: true,
+        src: ['**/*'],
+        dest: 'dist/test/request'
       },
       pluginDef: {
         expand: true,
@@ -78,5 +89,5 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('default', ['clean', 'copy:src_to_dist', 'copy:pluginDef', 'babel', 'mochaTest']);
+  grunt.registerTask('default', ['clean', 'copy:src_to_dist', 'copy:request', 'copy:request_tests', 'copy:pluginDef', 'babel', 'mochaTest']);
 };
