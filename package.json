@@ -8,7 +8,7 @@
     "build": "./node_modules/grunt-cli/bin/grunt",
     "test": "./node_modules/grunt-cli/bin/grunt mochaTest"
   },
-  "author": "",
+  "author": "CRINON Nicolas",
   "license": "",
   "engines": {
     "node": "6.14.3"
