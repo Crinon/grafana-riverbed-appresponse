@@ -1,6 +1,7 @@
 # grafana-riverbed-appresponse
 
 This datasource plugin allows Grafana to submit requests to Riverbed SteelCentral AppResponse.
+
 Data retrieved are shown in panel (graph, heatmap, table ...).
 
 
@@ -8,8 +9,11 @@ Data retrieved are shown in panel (graph, heatmap, table ...).
 ## Installation
 
 Place this folder in the plugins directory /var/lib/grafana/plugins
+
 Run ```npm install```to build node_modules folder
+
 Run ```npm run build```to build dist folder
+
 You may need to reboot your Grafana server to complete plugin installation
 
 
