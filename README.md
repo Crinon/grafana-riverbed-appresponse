@@ -4,6 +4,7 @@ This datasource plugin allows Grafana to submit requests to Riverbed SteelCentra
 
 Data retrieved are shown in panel (graph, heatmap, table ...).
 
+This plugin is fully native, it replace this older one who required a Python server to be runned : https://github.com/Crinon/outDated-Grafana-Datasource-Plugin-For-Riverbed-AppResponse
 
 
 
@@ -36,6 +37,3 @@ npm run build
 
 1.0.0
 - Release
-
-
-CRINON Nicolas ncrinon@mgen.fr
