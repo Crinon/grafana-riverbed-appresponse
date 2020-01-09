@@ -6,6 +6,7 @@ Data retrieved are shown in panel (graph, heatmap, table ...).
 
 
 
+
 ## Installation
 
 Place this folder in the plugins directory /var/lib/grafana/plugins
@@ -18,6 +19,7 @@ You may need to reboot your Grafana server to complete plugin installation
 
 
 
+
 ### Dev setup
 
 This plugin requires node 6.10.0
@@ -27,6 +29,7 @@ npm install -g yarn
 yarn install
 npm run build
 ```
+
 
 
 ### Changelog
