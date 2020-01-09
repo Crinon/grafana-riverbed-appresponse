@@ -6,6 +6,8 @@ Data retrieved are shown in panel (graph, heatmap, table ...).
 
 This plugin is fully native, it replace this older one who required a Python server to be runned : https://github.com/Crinon/outDated-Grafana-Datasource-Plugin-For-Riverbed-AppResponse
 
+![alt text](https://raw.githubusercontent.com/Crinon/grafana-riverbed-appresponse/master/screenAppResponseReadme.PNG)
+
 
 ## Installation
 
