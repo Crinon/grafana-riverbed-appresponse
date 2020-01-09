@@ -9,27 +9,20 @@ This plugin is fully native, it replace this older one who required a Python ser
 
 ## Installation
 
-Place this folder in the plugins directory /var/lib/grafana/plugins
-
-Run ```npm install```to build node_modules folder
-
-Run ```npm run build```to build dist folder
+Simply place this folder in the plugins directory /var/lib/grafana/plugins
 
 You may need to reboot your Grafana server to complete plugin installation
 
 
-
-
 ### Dev setup
+
+If you want to modify this plugin :
 
 This plugin requires node 6.10.0
 
-```
-npm install -g yarn
-yarn install
-npm run build
-```
+Run ```npm install```to build node_modules folder
 
+Run ```npm run build```to build dist folder
 
 
 ### Changelog
